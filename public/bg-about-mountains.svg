@@ -1,0 +1,92 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <linearGradient id="aBg" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stopColor="#020617" stopOpacity="1"/>
+      <stop offset="40%" stopColor="#020617" stopOpacity="0.6"/>
+      <stop offset="100%" stopColor="#020617" stopOpacity="0"/>
+    </linearGradient>
+    <linearGradient id="mtGrad1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stopColor="#10B981" stopOpacity="0.5"/>
+      <stop offset="100%" stopColor="#059669" stopOpacity="0.08"/>
+    </linearGradient>
+    <linearGradient id="mtGrad2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stopColor="#34D399" stopOpacity="0.35"/>
+      <stop offset="100%" stopColor="#10B981" stopOpacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="mtGrad3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stopColor="#6EE7B7" stopOpacity="0.2"/>
+      <stop offset="100%" stopColor="#10B981" stopOpacity="0.03"/>
+    </linearGradient>
+    <linearGradient id="pathGlow" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stopColor="#059669" stopOpacity="0.1"/>
+      <stop offset="40%" stopColor="#10B981" stopOpacity="0.5"/>
+      <stop offset="70%" stopColor="#34D399" stopOpacity="0.6"/>
+      <stop offset="100%" stopColor="#6EE7B7" stopOpacity="0.3"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+    <filter id="glowBig">
+      <feGaussianBlur stdDeviation="20"/>
+    </filter>
+  </defs>
+
+  <!-- Base -->
+  <rect width="1920" height="1080" fill="#020617"/>
+
+  <!-- Big glow spheres -->
+  <circle cx="300" cy="200" r="250" fill="#10B981" opacity="0.08" filter="url(#glowBig)"/>
+  <circle cx="1600" cy="700" r="200" fill="#34D399" opacity="0.06" filter="url(#glowBig)"/>
+  <circle cx="960" cy="100" r="180" fill="#059669" opacity="0.05" filter="url(#glowBig)"/>
+
+  <!-- Mountains back layer - dark green -->
+  <path d="M-100 1080 L100 250 L300 380 L500 200 L700 350 L900 180 L1100 320 L1300 160 L1500 300 L1700 140 L1900 280 L2020 1080 Z" fill="url(#mtGrad1)" opacity="0.9"/>
+
+  <!-- Mountains mid layer -->
+  <path d="M-100 1080 L50 380 L250 500 L450 350 L650 480 L850 320 L1050 450 L1250 300 L1450 430 L1650 280 L1850 400 L2020 1080 Z" fill="url(#mtGrad2)" opacity="0.85"/>
+
+  <!-- Mountains front layer -->
+  <path d="M-100 1080 L180 500 L380 620 L580 480 L780 600 L980 450 L1180 570 L1380 440 L1580 550 L1780 420 L2020 1080 Z" fill="url(#mtGrad3)" opacity="0.8"/>
+
+  <!-- Path with dashes - career path -->
+  <path d="M100 420 Q200 350 300 280 Q400 220 500 200 Q600 180 700 140 Q800 100 900 90 Q1000 80 1100 60" stroke="url(#pathGlow)" strokeWidth="4" strokeLinecap="round" strokeDasharray="12 8" opacity="0.6" filter="url(#glow)"/>
+
+  <!-- Path nodes -->
+  <circle cx="100" cy="420" r="8" fill="#10B981" opacity="0.8"/>
+  <circle cx="100" cy="420" r="14" fill="#10B981" opacity="0.2"/>
+  <circle cx="300" cy="280" r="7" fill="#34D399" opacity="0.7"/>
+  <circle cx="300" cy="280" r="13" fill="#34D399" opacity="0.15"/>
+  <circle cx="500" cy="200" r="8" fill="#10B981" opacity="0.6"/>
+  <circle cx="500" cy="200" r="14" fill="#10B981" opacity="0.15"/>
+  <circle cx="700" cy="140" r="7" fill="#34D399" opacity="0.6"/>
+  <circle cx="700" cy="140" r="13" fill="#34D399" opacity="0.12"/>
+  <circle cx="900" cy="90" r="9" fill="#6EE7B7" opacity="0.6"/>
+  <circle cx="900" cy="90" r="16" fill="#6EE7B7" opacity="0.15"/>
+  
+  <!-- Star at top -->
+  <polygon points="1100,40 1105,55 1120,55 1108,65 1112,80 1100,70 1088,80 1092,65 1080,55 1095,55" fill="#34D399" opacity="0.8" filter="url(#glow)"/>
+
+  <!-- Stars in sky -->
+  <g opacity="0.5">
+    <circle cx="150" cy="80" r="2" fill="#6EE7B7"/>
+    <circle cx="400" cy="100" r="1.5" fill="#34D399"/>
+    <circle cx="650" cy="50" r="2" fill="#10B981"/>
+    <circle cx="850" cy="120" r="1.5" fill="#6EE7B7"/>
+    <circle cx="1100" cy="130" r="2" fill="#34D399"/>
+    <circle cx="1350" cy="70" r="1.5" fill="#10B981"/>
+    <circle cx="1550" cy="100" r="2" fill="#6EE7B7"/>
+    <circle cx="1750" cy="60" r="1.5" fill="#34D399"/>
+  </g>
+
+  <!-- Floating particles -->
+  <g opacity="0.4">
+    <circle cx="250" cy="180" r="3" fill="#10B981" filter="url(#glow)"/>
+    <circle cx="450" cy="130" r="2" fill="#34D399"/>
+    <circle cx="750" cy="80" r="3" fill="#10B981" filter="url(#glow)"/>
+    <circle cx="950" cy="150" r="2" fill="#6EE7B7"/>
+    <circle cx="1200" cy="100" r="2.5" fill="#34D399" filter="url(#glow)"/>
+  </g>
+
+  <!-- Bottom fade gradient -->
+  <rect x="0" y="550" width="1920" height="530" fill="url(#aBg)"/>
+</svg>

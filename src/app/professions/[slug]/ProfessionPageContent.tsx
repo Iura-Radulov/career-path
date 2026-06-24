@@ -1,0 +1,266 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import LandingNav from '@/components/LandingNav';
+import Footer from '@/components/Footer';
+import { useTranslation } from '@/lib/i18n';
+import { MINI_APP_WEB_URL } from '@/lib/constants';
+
+interface ProfessionData {
+  id: number;
+  slug: string;
+  name_en: string;
+  name_ru: string;
+  emoji: string;
+  category: string;
+  description_short: string | null;
+  description_long: string | null;
+  why_popular: string | null;
+  entry_salary_eu: string | null;
+  entry_salary_cis: string | null;
+  growth_outlook: string | null;
+  what_to_study: string | null;
+  background_image: string | null;
+}
+
+const fallbackProfessions: Record<string, Omit<ProfessionData, 'id' | 'description_long' | 'why_popular' | 'what_to_study'>> = {
+  'software-dev': {
+    slug: 'software-dev', name_en: 'Software Developer', name_ru: 'Разработчик ПО',
+    emoji: '💻', category: 'technology',
+    description_short: 'Создавай приложения, сайты и программы, которыми пользуются миллионы.',
+    entry_salary_eu: '€40,000 – €95,000', entry_salary_cis: '$12,000 – $50,000',
+    growth_outlook: 'Very High (25% by 2030)', background_image: null,
+  },
+  'doctor': {
+    slug: 'doctor', name_en: 'Doctor', name_ru: 'Врач',
+    emoji: '🏥', category: 'health',
+    description_short: 'Лечи людей и спасай жизни в одной из самых важных профессий.',
+    entry_salary_eu: '€55,000 – €120,000', entry_salary_cis: '$15,000 – $60,000',
+    growth_outlook: 'High (10% by 2030)', background_image: null,
+  },
+  'designer': {
+    slug: 'designer', name_en: 'UX/UI Designer', name_ru: 'UX/UI Дизайнер',
+    emoji: '🎨', category: 'creative',
+    description_short: 'Создавай удобные и красивые интерфейсы для цифровых продуктов.',
+    entry_salary_eu: '€35,000 – €80,000', entry_salary_cis: '$10,000 – $45,000',
+    growth_outlook: 'High (15% by 2030)', background_image: null,
+  },
+  'engineer': {
+    slug: 'engineer', name_en: 'Civil Engineer', name_ru: 'Инженер-строитель',
+    emoji: '⚙️', category: 'engineering',
+    description_short: 'Проектируй и строй здания, мосты и инфраструктуру будущего.',
+    entry_salary_eu: '€45,000 – €85,000', entry_salary_cis: '$12,000 – $40,000',
+    growth_outlook: 'Moderate (5% by 2030)', background_image: null,
+  },
+  'marketer': {
+    slug: 'marketer', name_en: 'Digital Marketer', name_ru: 'Digital-маркетер',
+    emoji: '📊', category: 'business',
+    description_short: 'Продвигай бренды и продукты в цифровом мире.',
+    entry_salary_eu: '€30,000 – €70,000', entry_salary_cis: '$8,000 – $35,000',
+    growth_outlook: 'High (18% by 2030)', background_image: null,
+  },
+  'analyst': {
+    slug: 'analyst', name_en: 'Data Analyst / Scientist', name_ru: 'Аналитик данных',
+    emoji: '👨‍💼', category: 'technology',
+    description_short: 'Анализируй данные и находи инсайты для бизнеса.',
+    entry_salary_eu: '€45,000 – €100,000', entry_salary_cis: '$15,000 – $55,000',
+    growth_outlook: 'Very High (28% by 2030)', background_image: null,
+  },
+  'energy': {
+    slug: 'energy', name_en: 'Renewable Energy Tech', name_ru: 'Специалист по возобновляемой энергии',
+    emoji: '⚡', category: 'engineering',
+    description_short: 'Работай над решениями для устойчивого энергетического будущего.',
+    entry_salary_eu: '€40,000 – €80,000', entry_salary_cis: '$10,000 – $35,000',
+    growth_outlook: 'Very High (35% by 2030)', background_image: null,
+  },
+  'creator': {
+    slug: 'creator', name_en: 'Content Creator', name_ru: 'Криэйтор / Контент-мейкер',
+    emoji: '🎬', category: 'business',
+    description_short: 'Создавай контент для соцсетей, YouTube, TikTok и других платформ.',
+    entry_salary_eu: '€25,000 – €120,000', entry_salary_cis: '$5,000 – $60,000',
+    growth_outlook: 'High (20% by 2030)', background_image: null,
+  },
+};
+
+const categoryColors: Record<string, string> = {
+  technology: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
+  health: 'bg-rose-500/10 text-rose-400 border-rose-500/20',
+  creative: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
+  engineering: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
+  business: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
+};
+
+interface Props {
+  slug: string;
+}
+
+export default function ProfessionPageContent({ slug }: Props) {
+  const { t } = useTranslation();
+  const [profession, setProfession] = useState<ProfessionData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`/api/admin/professions/by-slug/${slug}`)
+      .then(r => r.json())
+      .then((data: ProfessionData | null) => {
+        setProfession(data);
+      })
+      .catch(() => {
+        // Fallback to static data
+        const fallback = fallbackProfessions[slug];
+        if (fallback) {
+          setProfession({ id: 0, ...fallback, description_long: null, why_popular: null, what_to_study: null });
+        }
+      })
+      .finally(() => setLoading(false));
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (!profession) {
+    return (
+      <div className="min-h-screen bg-slate-950">
+        <LandingNav />
+        <div className="flex flex-col items-center justify-center min-h-screen px-4 text-center">
+          <p className="text-6xl mb-6">🔍</p>
+          <h1 className="text-2xl font-bold text-white mb-4">{t('profession.not_found')}</h1>
+          <Link href="/professions" className="text-emerald-400 hover:text-emerald-300 transition-colors">
+            {t('profession.back')}
+          </Link>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  const { name_en, emoji, category: categoryKey, entry_salary_eu, entry_salary_cis, growth_outlook, background_image } = profession;
+
+  return (
+    <div className="min-h-screen bg-slate-950">
+      <LandingNav />
+
+      {/* Hero with background image */}
+      <section className={`relative overflow-hidden ${background_image ? 'flex items-center py-40 pt-44 sm:py-56 sm:pt-60' : 'py-40 pt-44 sm:py-56 sm:pt-60'}`}>
+        {background_image && (
+          <>
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url(${background_image}?v=2)` }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-[rgba(2,6,23,0.65)] via-[rgba(2,6,23,0.2)] to-[rgba(2,6,23,0.6)]" />
+          </>
+        )}
+        {!background_image && (
+          <>
+            <div
+              className="absolute inset-0"
+              style={{ background: 'linear-gradient(135deg, #0f172a 0%, #020617 100%)' }}
+            />
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: 'radial-gradient(ellipse 80% 50% at 50% -20%, rgba(16,185,129,0.15) 0%, transparent 60%)',
+              }}
+            />
+          </>
+        )}
+        <div className="relative z-10 w-full px-4">
+          <div className="max-w-4xl mx-auto">
+            <Link
+              href="/professions"
+              className="inline-flex items-center text-slate-400 hover:text-white text-sm mb-6 transition-colors"
+            >
+              {t('profession.back')}
+            </Link>
+            <div className="flex items-start gap-6">
+              <div className="text-6xl flex-shrink-0">{emoji}</div>
+              <div>
+                <div className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border mb-3 ${categoryColors[categoryKey] || 'bg-slate-600/20 text-slate-400 border-slate-600/30'}`}>
+                  {t(`professions.${categoryKey}`)}
+                </div>
+                <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+                  {profession.name_ru || name_en}
+                </h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="max-w-4xl mx-auto px-4 py-16 space-y-10">
+
+        {/* Description */}
+        <section className="p-6 rounded-2xl bg-slate-800/50 border border-slate-700/50">
+          <h2 className="text-xl font-bold text-white mb-3">{t('profession.description')}</h2>
+          <p className="text-slate-300 leading-relaxed">{profession.description_short || profession.description_long || t(`professions.${slug}.desc`)}</p>
+        </section>
+
+        {/* Salary insights */}
+        <section className="p-6 rounded-2xl bg-slate-800/50 border border-slate-700/50">
+          <h2 className="text-xl font-bold text-white mb-4">{t('profession.salary.title')}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-700/40">
+              <p className="text-slate-400 text-sm mb-1">{t('profession.salary.eu')}</p>
+              <p className="text-white font-semibold text-lg">{entry_salary_eu}</p>
+            </div>
+            <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-700/40">
+              <p className="text-slate-400 text-sm mb-1">{t('profession.salary.cis')}</p>
+              <p className="text-white font-semibold text-lg">{entry_salary_cis}</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Growth outlook */}
+        {growth_outlook && (
+          <section className="p-6 rounded-2xl bg-slate-800/50 border border-slate-700/50">
+            <h2 className="text-xl font-bold text-white mb-3">{t('profession.growth')}</h2>
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">📈</span>
+              <p className="text-emerald-400 font-semibold text-lg">{growth_outlook}</p>
+            </div>
+          </section>
+        )}
+
+        {/* AI Test */}
+        <section className="p-6 rounded-2xl bg-slate-800/50 border border-slate-700/50">
+          <h2 className="text-xl font-bold text-white mb-3">{t('profession.test.title')}</h2>
+          <p className="text-slate-300 leading-relaxed mb-5">{t('profession.test.desc')}</p>
+          <a
+            href={MINI_APP_WEB_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:scale-95 text-white font-semibold transition-all duration-150 shadow-lg shadow-emerald-500/25"
+          >
+            {t('profession.start_test')}
+            <span>→</span>
+          </a>
+        </section>
+
+        {/* AI Roleplay */}
+        <section className="p-6 rounded-2xl bg-slate-800/50 border border-slate-700/50">
+          <h2 className="text-xl font-bold text-white mb-3">{t('profession.roleplay.title')}</h2>
+          <p className="text-slate-300 leading-relaxed mb-5">{t('profession.roleplay.desc')}</p>
+          <a
+            href={MINI_APP_WEB_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-400 font-semibold hover:bg-emerald-500/20 hover:border-emerald-400 transition-all"
+          >
+            {t('profession.roleplay.title')}
+            <span>→</span>
+          </a>
+        </section>
+
+      </div>
+
+      <Footer />
+    </div>
+  );
+}

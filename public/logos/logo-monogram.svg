@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" width="200" height="50">
+  <defs>
+    <linearGradient id="l3g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+  <!-- Logo mark: stylized CP monogram with hidden arrow -->
+  <rect x="2" y="7" width="36" height="36" rx="8" fill="url(#l3g)"/>
+  <!-- C letter (half circle) -->
+  <path d="M26 14 Q20 12 15 16 Q10 20 10 25 Q10 30 15 34 Q20 38 26 36" stroke="#0F172A" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <!-- P letter -->
+  <path d="M18 14 L18 36" stroke="#0F172A" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <path d="M18 14 L26 14 Q32 14 32 20 Q32 26 26 26 L18 26" stroke="#0F172A" stroke-width="3.5" stroke-linejoin="round" fill="none"/>
+  <!-- Forward arrow subtly integrated -->
+  <path d="M28 30 L32 26 L36 30" stroke="#6EE7B7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.8"/>
+  <path d="M32 22 L32 34" stroke="#6EE7B7" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8"/>
+  <!-- Text -->
+  <text x="46" y="27" font-family="Inter, -apple-system, sans-serif" font-weight="700" font-size="16" fill="white" letter-spacing="-0.3">Career Path</text>
+  <text x="46" y="42" font-family="Inter, -apple-system, sans-serif" font-weight="400" font-size="11" fill="#94A3B8" letter-spacing="1.5">SIMULATOR</text>
+</svg>

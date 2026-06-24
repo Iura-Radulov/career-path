@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" width="200" height="50">
+  <defs>
+    <linearGradient id="l2g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+  <!-- Logo mark: mountain path with glowing nodes -->
+  <rect x="2" y="7" width="36" height="36" rx="8" fill="#1E293B" stroke="url(#l2g)" stroke-width="1.5"/>
+  <!-- Path climbing upward -->
+  <path d="M8 35 L14 28 L18 24 L22 18 L26 14 L32 10" stroke="#34D399" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <!-- Nodes on path -->
+  <circle cx="14" cy="28" r="2.5" fill="#059669"/>
+  <circle cx="22" cy="18" r="2.5" fill="#059669"/>
+  <circle cx="32" cy="10" r="3" fill="#34D399"/>
+  <!-- Star at summit -->
+  <path d="M32 5 L32.8 7.5 L35.5 7.5 L33.3 9.2 L34.2 11.8 L32 10.2 L29.8 11.8 L30.7 9.2 L28.5 7.5 L31.2 7.5 Z" fill="#6EE7B7" opacity="0.9"/>
+  <!-- Text -->
+  <text x="46" y="27" font-family="Inter, -apple-system, sans-serif" font-weight="700" font-size="16" fill="white" letter-spacing="-0.3">Career Path</text>
+  <text x="46" y="42" font-family="Inter, -apple-system, sans-serif" font-weight="400" font-size="11" fill="#94A3B8" letter-spacing="1.5">SIMULATOR</text>
+</svg>

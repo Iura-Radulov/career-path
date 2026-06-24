@@ -1,0 +1,103 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <linearGradient id="cBg" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stopColor="#020617" stopOpacity="1"/>
+      <stop offset="35%" stopColor="#020617" stopOpacity="0.5"/>
+      <stop offset="100%" stopColor="#020617" stopOpacity="0"/>
+    </linearGradient>
+    <linearGradient id="ringFade" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stopColor="#34D399" stopOpacity="0.5"/>
+      <stop offset="60%" stopColor="#10B981" stopOpacity="0.15"/>
+      <stop offset="100%" stopColor="#059669" stopOpacity="0"/>
+    </linearGradient>
+    <linearGradient id="nodeLine" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stopColor="#10B981" stopOpacity="0.1"/>
+      <stop offset="50%" stopColor="#34D399" stopOpacity="0.4"/>
+      <stop offset="100%" stopColor="#10B981" stopOpacity="0.1"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+    <filter id="glowBig">
+      <feGaussianBlur stdDeviation="25"/>
+    </filter>
+  </defs>
+
+  <!-- Base -->
+  <rect width="1920" height="1080" fill="#020617"/>
+
+  <!-- Ambient glows -->
+  <circle cx="960" cy="300" r="300" fill="#10B981" opacity="0.06" filter="url(#glowBig)"/>
+  <circle cx="300" cy="600" r="200" fill="#059669" opacity="0.04" filter="url(#glowBig)"/>
+  <circle cx="1600" cy="400" r="250" fill="#34D399" opacity="0.05" filter="url(#glowBig)"/>
+
+  <!-- Large compass ring - center-right -->
+  <g transform="translate(1350, 250)" opacity="0.7">
+    <circle cx="0" cy="0" r="220" stroke="#34D399" strokeWidth="1" opacity="0.3"/>
+    <circle cx="0" cy="0" r="180" stroke="#10B981" strokeWidth="0.8" opacity="0.25"/>
+    <circle cx="0" cy="0" r="140" stroke="#6EE7B7" strokeWidth="0.6" opacity="0.2"/>
+    <circle cx="0" cy="0" r="100" stroke="#34D399" strokeWidth="0.5" opacity="0.15"/>
+    <!-- Cross lines -->
+    <line x1="0" y1="-220" x2="0" y2="220" stroke="#34D399" strokeWidth="0.6" opacity="0.25"/>
+    <line x1="-220" y1="0" x2="220" y2="0" stroke="#34D399" strokeWidth="0.6" opacity="0.25"/>
+    <line x1="-155" y1="-155" x2="155" y2="155" stroke="#10B981" strokeWidth="0.4" opacity="0.15"/>
+    <line x1="155" y1="-155" x2="-155" y2="155" stroke="#10B981" strokeWidth="0.4" opacity="0.15"/>
+    <!-- Compass needle -->
+    <polygon points="0,-80 5,0 0,80 -5,0" fill="#10B981" opacity="0.3"/>
+    <circle cx="0" cy="0" r="6" fill="#34D399" opacity="0.5"/>
+  </g>
+
+  <!-- Medium compass - bottom left -->
+  <g transform="translate(250, 650)" opacity="0.5">
+    <circle cx="0" cy="0" r="120" stroke="#10B981" strokeWidth="0.8" opacity="0.25"/>
+    <circle cx="0" cy="0" r="80" stroke="#34D399" strokeWidth="0.6" opacity="0.2"/>
+    <circle cx="0" cy="0" r="40" stroke="#6EE7B7" strokeWidth="0.4" opacity="0.15"/>
+    <line x1="0" y1="-120" x2="0" y2="120" stroke="#10B981" strokeWidth="0.5" opacity="0.2"/>
+    <line x1="-120" y1="0" x2="120" y2="0" stroke="#10B981" strokeWidth="0.5" opacity="0.2"/>
+    <polygon points="0,-45 3,0 0,45 -3,0" fill="#34D399" opacity="0.2"/>
+  </g>
+
+  <!-- Small compass - top left -->
+  <g transform="translate(200, 180)" opacity="0.4">
+    <circle cx="0" cy="0" r="70" stroke="#34D399" strokeWidth="0.6" opacity="0.2"/>
+    <circle cx="0" cy="0" r="45" stroke="#10B981" strokeWidth="0.4" opacity="0.15"/>
+    <line x1="0" y1="-70" x2="0" y2="70" stroke="#34D399" strokeWidth="0.4" opacity="0.15"/>
+    <line x1="-70" y1="0" x2="70" y2="0" stroke="#34D399" strokeWidth="0.4" opacity="0.15"/>
+  </g>
+
+  <!-- Network / connection nodes -->
+  <g opacity="0.5">
+    <circle cx="600" cy="250" r="6" fill="#34D399" opacity="0.6"/>
+    <circle cx="800" cy="400" r="5" fill="#10B981" opacity="0.5"/>
+    <circle cx="450" cy="450" r="4" fill="#6EE7B7" opacity="0.4"/>
+    <circle cx="700" cy="550" r="5" fill="#34D399" opacity="0.45"/>
+    <circle cx="1000" cy="350" r="4" fill="#10B981" opacity="0.5"/>
+    
+    <!-- Connection lines -->
+    <line x1="600" y1="250" x2="800" y2="400" stroke="#34D399" strokeWidth="0.8" opacity="0.3"/>
+    <line x1="800" y1="400" x2="1000" y2="350" stroke="#10B981" strokeWidth="0.8" opacity="0.25"/>
+    <line x1="600" y1="250" x2="450" y2="450" stroke="#10B981" strokeWidth="0.5" opacity="0.2"/>
+    <line x1="450" y1="450" x2="700" y2="550" stroke="#6EE7B7" strokeWidth="0.5" opacity="0.2"/>
+    <line x1="700" y1="550" x2="800" y2="400" stroke="#34D399" strokeWidth="0.5" opacity="0.15"/>
+  </g>
+
+  <!-- Horizontal orbit rings -->
+  <ellipse cx="960" cy="550" rx="600" ry="25" stroke="#10B981" strokeWidth="0.5" opacity="0.15"/>
+  <ellipse cx="960" cy="450" rx="450" ry="18" stroke="#34D399" strokeWidth="0.4" opacity="0.12"/>
+  <ellipse cx="960" cy="350" rx="300" ry="12" stroke="#6EE7B7" strokeWidth="0.3" opacity="0.1"/>
+
+  <!-- Stars -->
+  <g opacity="0.6">
+    <circle cx="100" cy="80" r="2" fill="#6EE7B7"/>
+    <circle cx="350" cy="120" r="1.5" fill="#34D399"/>
+    <circle cx="550" cy="60" r="2" fill="#10B981"/>
+    <circle cx="750" cy="140" r="1.5" fill="#6EE7B7"/>
+    <circle cx="1100" cy="90" r="2" fill="#34D399"/>
+    <circle cx="1400" cy="60" r="1.5" fill="#10B981"/>
+    <circle cx="1650" cy="120" r="2" fill="#6EE7B7"/>
+    <circle cx="1850" cy="80" r="1.5" fill="#34D399"/>
+  </g>
+
+  <!-- Bottom fade -->
+  <rect x="0" y="600" width="1920" height="480" fill="url(#cBg)"/>
+</svg>
