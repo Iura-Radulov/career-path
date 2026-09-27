@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X, Globe } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n';
 import { MINI_APP_WEB_URL } from '@/lib/constants';
@@ -11,17 +12,33 @@ export default function LandingNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const { t, uiLang, setUiLang } = useTranslation();
+  const pathname = usePathname();
+
+  const isRu = pathname.startsWith('/ru');
+  const prefix = isRu ? '/ru' : '';
 
   const navLinks = [
-    { href: '/about', label: t('nav.about') },
-    { href: '/professions', label: t('nav.professions') },
-    { href: '/pricing', label: t('nav.pricing') },
+    { href: `${prefix}/about`, label: t('nav.about') },
+    { href: `${prefix}/professions`, label: t('nav.professions') },
+    { href: `${prefix}/blog`, label: t('nav.blog') },
   ];
 
-  function handleSetLang(lang: 'en' | 'ru') {
-    setUiLang(lang);
-    setLangOpen(false);
-  }
+  const handleSetLang = useCallback(
+    (lang: 'en' | 'ru') => {
+      setUiLang(lang);
+      setLangOpen(false);
+
+      // Update cookie so middleware won't redirect back
+      document.cookie = `user_locale=${lang}; path=/; max-age=31536000; SameSite=Lax`;
+
+      // Navigate to correct locale URL
+      const currentPath = pathname.replace(/^\/ru(\/|$)/, '/');
+      const targetPath = lang === 'ru' ? `/ru${currentPath === '/' ? '' : currentPath}` : currentPath || '/';
+      // Use hard navigation so middleware picks up the new cookie
+      window.location.href = targetPath;
+    },
+    [pathname, setUiLang],
+  );
 
   return (
     <nav
@@ -31,7 +48,7 @@ export default function LandingNav() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
+          <Link href={prefix || '/'} className="flex items-center">
             <Logo />
           </Link>
 

@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllProfessions, createProfession, type ProfessionData } from '@/lib/db';
+import { getAllProfessions, getHomePageProfessions, createProfession, type ProfessionData } from '@/lib/db';
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const professions = getAllProfessions();
+    const { searchParams } = new URL(request.url);
+    const homeOnly = searchParams.get('home') === '1';
+    const professions = homeOnly ? getHomePageProfessions() : getAllProfessions();
     return NextResponse.json(professions);
   } catch (error) {
     console.error('Get professions error:', error);

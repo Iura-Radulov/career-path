@@ -10,6 +10,8 @@ interface AdminSidebarProps {
 
 const navItems = [
   { href: '/admin', label: 'Главная', icon: '📊' },
+  { href: '/admin/platforms', label: 'Платформы', icon: '🛒' },
+  { href: '/admin/articles', label: 'Статьи', icon: '📝' },
   { href: '/admin/professions', label: 'Профессии', icon: '💼' },
   { href: '/admin/users', label: 'Пользователи', icon: '👥' },
   { href: '/admin/analyses', label: 'Анализы карьеры', icon: '📈' },

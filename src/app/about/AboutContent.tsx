@@ -22,13 +22,7 @@ export default function AboutContent() {
             backgroundSize: 'cover',
           }}
         />
-        {/* Dark overlay for text readability */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(180deg, rgba(2,6,23,0.65) 0%, rgba(2,6,23,0.2) 50%, rgba(2,6,23,0.6) 100%)',
-          }}
-        />
+        {/* No overlay - full visibility */}
         {/* Radial glow */}
         <div
           className="absolute inset-0 pointer-events-none"

@@ -10,8 +10,19 @@ const slugNames: Record<string, string> = {
   'engineer': 'Civil Engineer',
   'marketer': 'Digital Marketer',
   'analyst': 'Data Analyst / Scientist',
+  'data-scientist': 'Data Scientist',
   'energy': 'Renewable Energy Tech',
+  'renewable-energy': 'Renewable Energy Specialist',
   'creator': 'Content Creator',
+  'content-creator': 'Content Creator',
+  'ai-ml-engineer': 'AI/ML Engineer',
+  'project-manager': 'Project Manager',
+  'psychologist': 'Psychologist',
+  'cybersecurity': 'Cybersecurity Specialist',
+  'devops': 'DevOps Engineer',
+  'product-manager': 'Product Manager',
+  'data-analyst': 'Data Analyst',
+  'smm-specialist': 'SMM Specialist',
 };
 
 export async function generateStaticParams() {

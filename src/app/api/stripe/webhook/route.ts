@@ -52,8 +52,8 @@ export async function POST(request: Request) {
         }
         if (!user) {
           // Create user if doesn't exist
-          const result = db.prepare("INSERT INTO users (telegram_id, role) VALUES (?, 'user') RETURNING id").get(telegramId || null) as Record<string, unknown>;
-          user = result;
+          const result = db.prepare("INSERT INTO users (telegram_id, role) VALUES (?, 'user')").run(telegramId || null) as Record<string, unknown>;
+          user = { id: result.lastInsertRowid };
         }
 
         const actualUserId = user.id as number;

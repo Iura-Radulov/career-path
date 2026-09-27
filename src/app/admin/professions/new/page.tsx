@@ -22,13 +22,14 @@ interface FormData {
   growth_outlook: string;
   sort_order: string;
   is_active: boolean;
+  home_page: boolean;
 }
 
 const EMPTY: FormData = {
   slug: '', name_en: '', name_ru: '', emoji: '', category: CATEGORIES[0],
   description_short: '', description_full: '', background_image: '',
   entry_salary_eu: '', entry_salary_cis: '',
-  growth_outlook: '', sort_order: '0', is_active: true,
+  growth_outlook: '', sort_order: '0', is_active: true, home_page: false,
 };
 
 function NewProfessionContent({ user }: { user: User }) {
@@ -53,6 +54,7 @@ function NewProfessionContent({ user }: { user: User }) {
           ...form,
           sort_order: Number(form.sort_order),
           is_active: form.is_active ? 1 : 0,
+          home_page: form.home_page ? 1 : 0,
         }),
       });
       if (!res.ok) {
@@ -170,6 +172,14 @@ function NewProfessionContent({ user }: { user: User }) {
                 checked={form.is_active} onChange={(e) => set('is_active', e.target.checked)}
               />
               <span className="text-slate-300 text-sm">Активна (показывать на сайте)</span>
+            </label>
+
+            <label className="flex items-center gap-3 cursor-pointer">
+              <input
+                type="checkbox" className="w-4 h-4 accent-cyan-500"
+                checked={form.home_page} onChange={(e) => set('home_page', e.target.checked)}
+              />
+              <span className="text-slate-300 text-sm">Показывать на главной</span>
             </label>
 
             <div className="flex gap-3 pt-2">

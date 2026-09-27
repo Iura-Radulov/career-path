@@ -15,7 +15,7 @@ export const translations: Record<string, Record<string, string>> = {
     'nav.web_app': 'Web App',
 
     /* Hero */
-    'hero.badge': 'AI career guidance · Interactive tests · Roleplay · 8 professions · EN / RU',
+    'hero.badge': 'AI career guidance · Interactive tests · Roleplay · 16 professions · EN / RU',
     'hero.title': 'Discover Your Ideal {path}',
     'hero.title_highlight': 'Career Path',
     'hero.subtitle': 'Not sure what career suits you? Take a 10-minute AI-powered test. Explore 8 professions through interactive roleplay, get a personalized roadmap, and find your path with confidence.',
@@ -50,9 +50,9 @@ export const translations: Record<string, Record<string, string>> = {
     'how.step3.desc': 'Talk to an AI professional in an interactive roleplay. Ask real questions about their daily life, challenges, and career path.',
 
     /* Professions */
-    'professions.title': 'Explore 8 Professions',
+    'professions.title': 'Explore 16 Professions',
     'professions.subtitle': 'Each with AI-powered test, interactive roleplay, and personalized roadmap.',
-    'professions.cta': 'Learn More →',
+    'professions.cta': 'Learn More',
     'professions.technology': 'Technology',
     'professions.health': 'Health',
     'professions.engineering': 'Engineering',
@@ -63,20 +63,54 @@ export const translations: Record<string, Record<string, string>> = {
     'professions.education': 'Education',
     'professions.dev.name': 'Software Developer',
     'professions.dev.desc': 'Build apps, websites, and systems. High demand, remote-friendly, strong salary growth.',
+    'professions.dev.growth': 'Very High (25% by 2030)',
     'professions.doctor.name': 'Doctor',
     'professions.doctor.desc': 'Diagnose and treat patients. Meaningful work with lifelong learning and strong job security.',
+    'professions.doctor.growth': 'Steady growth, doctor shortage in EU',
     'professions.designer.name': 'UX/UI Designer',
     'professions.designer.desc': 'Design intuitive digital experiences. Blend creativity with user psychology and business goals.',
+    'professions.designer.growth': 'High demand growth (20% annually)',
     'professions.engineer.name': 'Civil Engineer',
     'professions.engineer.desc': 'Design and build infrastructure — bridges, roads, buildings. Shape the physical world.',
+    'professions.engineer.growth': 'Engineer shortage in EU, +€5k hiring bonus in Germany',
     'professions.marketer.name': 'Digital Marketer',
     'professions.marketer.desc': 'Drive growth through SEO, ads, and content. Data-driven creativity in a fast-moving field.',
+    'professions.marketer.growth': 'Digital ad growth 15% annually',
     'professions.analyst.name': 'Data Analyst / Scientist',
     'professions.analyst.desc': 'Turn raw data into business insights. Python, SQL, ML — high demand across every industry.',
+    'professions.analyst.growth': '35% growth by 2027 worldwide',
     'professions.energy.name': 'Renewable Energy Tech',
     'professions.energy.desc': 'Work on solar, wind, and energy systems. Future-proof career in the green economy.',
+    'professions.energy.growth': '40% specialist shortage in EU by 2027',
     'professions.creator.name': 'Content Creator',
     'professions.creator.desc': 'Build audiences on YouTube, TikTok, or podcasts. Turn creativity into a scalable career.',
+    'professions.creator.growth': 'Creator economy growing 30% annually',
+
+    /* Second wave professions (9-16) */
+    'professions.ai-ml-engineer.name': 'AI/ML Engineer',
+    'professions.ai-ml-engineer.desc': 'Build neural networks, train models, and create AI systems that power the future.',
+    'professions.ai-ml-engineer.growth': '35%+ growth in EU by 2028',
+    'professions.project-manager.name': 'Project Manager',
+    'professions.project-manager.desc': 'Lead projects, teams, and deadlines — make complex things simple.',
+    'professions.project-manager.growth': '15% growth in EU by 2027',
+    'professions.psychologist.name': 'Psychologist',
+    'professions.psychologist.desc': 'Help people understand themselves, find support, and transform their lives.',
+    'professions.psychologist.growth': '20% growth in CIS by 2027',
+    'professions.cybersecurity.name': 'Cybersecurity Specialist',
+    'professions.cybersecurity.desc': 'Protect data, systems, and networks from hackers and cyber attacks.',
+    'professions.cybersecurity.growth': '30%+ growth in EU by 2028',
+    'professions.devops.name': 'DevOps Engineer',
+    'professions.devops.desc': 'Build infrastructure, automate processes, and make releases fast and reliable.',
+    'professions.devops.growth': '25% growth in EU by 2027',
+    'professions.product-manager.name': 'Product Manager',
+    'professions.product-manager.desc': 'Create products people use every day — from idea to launch.',
+    'professions.product-manager.growth': '20% growth in EU by 2027',
+    'professions.data-analyst.name': 'Data Analyst',
+    'professions.data-analyst.desc': 'Turn raw data into clear business insights and data-driven decisions.',
+    'professions.data-analyst.growth': '20% growth in EU by 2027',
+    'professions.smm-specialist.name': 'SMM Specialist',
+    'professions.smm-specialist.desc': 'Create content, manage communities, and promote brands on social media.',
+    'professions.smm-specialist.growth': '15% growth in CIS by 2027',
 
     /* CTA */
     'cta.title': 'Ready to Find Your Path?',
@@ -115,7 +149,7 @@ export const translations: Record<string, Record<string, string>> = {
     'about.cta': 'Start Your Free Test',
 
     /* Professions page */
-    'professions.page.title': 'Explore 8 Professions',
+    'professions.page.title': 'Explore 16 Professions',
     'professions.page.subtitle': 'Each with AI-powered compatibility test, interactive roleplay, and personalized roadmap. Discover which career fits you best.',
     'professions.page.cta': 'Take the Test →',
 
@@ -181,6 +215,25 @@ export const translations: Record<string, Record<string, string>> = {
     'terms.changes.desc': 'We reserve the right to modify these Terms at any time. Changes will be posted on this page. Continued use of the Service after changes constitutes acceptance.',
     'terms.contact.title': 'Contact',
     'terms.contact.desc': 'PrepCraft LTD, 5 Brayford Square, London, E1 0SG, UK. Company No. 17249290.',
+    /* Blog */
+    'blog.title': 'Career Blog',
+    'blog.subtitle': 'Articles about career choices, professional growth, and industry insights.',
+    'blog.read_more': 'Read More',
+    'blog.all': 'All',
+    'blog.category.technology': 'Technology',
+    'blog.category.health': 'Health',
+    'blog.category.creative': 'Creative',
+    'blog.category.engineering': 'Engineering',
+    'blog.category.business': 'Business',
+    'blog.category.media': 'Media',
+    'blog.category.science': 'Science',
+    'blog.category.education': 'Education',
+    'blog.category.general': 'General',
+    'blog.not_found': 'Article not found',
+    'blog.back': 'Back to Blog',
+    'blog.published': 'Published',
+    'blog.by': 'by',
+    'nav.blog': 'Blog',
   },
 
   ru: {
@@ -194,7 +247,7 @@ export const translations: Record<string, Record<string, string>> = {
     'nav.web_app': 'Web App',
 
     /* Hero */
-    'hero.badge': 'AI ориентация · Интерактивные тесты · Ролевые игры · 8 профессий · EN / RU',
+    'hero.badge': 'AI ориентация · Интерактивные тесты · Ролевые игры · 16 профессий · EN / RU',
     'hero.title': 'Найди свой идеальный {path}',
     'hero.title_highlight': 'Карьерный путь',
     'hero.subtitle': 'Не знаешь, какая карьера тебе подойдёт? Пройди 10-минутный AI-тест. Исследуй 8 профессий через интерактивные ролевые игры, получи персональный план и найди свой путь с уверенностью.',
@@ -229,9 +282,9 @@ export const translations: Record<string, Record<string, string>> = {
     'how.step3.desc': 'Поговори с AI-специалистом в интерактивной ролевой игре. Задавай реальные вопросы о ежедневной работе, сложностях и карьерном пути.',
 
     /* Professions */
-    'professions.title': 'Изучи 8 профессий',
+    'professions.title': 'Изучи 16 профессий',
     'professions.subtitle': 'Каждая с AI-тестом, интерактивной ролевой игрой и персональным планом.',
-    'professions.cta': 'Подробнее →',
+    'professions.cta': 'Подробнее',
     'professions.technology': 'Технологии',
     'professions.health': 'Медицина',
     'professions.engineering': 'Инженерия',
@@ -294,7 +347,7 @@ export const translations: Record<string, Record<string, string>> = {
     'about.cta': 'Начать бесплатный тест',
 
     /* Professions page */
-    'professions.page.title': 'Изучи 8 профессий',
+    'professions.page.title': 'Изучи 16 профессий',
     'professions.page.subtitle': 'Каждая с AI-тестом совместимости, ролевой игрой и персональным планом развития. Узнай, какая карьера подходит тебе больше всего.',
     'professions.page.cta': 'Пройти тест →',
 
@@ -360,6 +413,25 @@ export const translations: Record<string, Record<string, string>> = {
     'terms.changes.desc': 'Мы оставляем за собой право изменять настоящие Условия в любое время. Изменения будут опубликованы на этой странице. Продолжение использования Сервиса после изменений означает принятие условий.',
     'terms.contact.title': 'Контакты',
     'terms.contact.desc': 'PrepCraft LTD, 5 Brayford Square, London, E1 0SG, UK. Компания № 17249290.',
+    /* Blog */
+    'blog.title': 'Блог о карьере',
+    'blog.subtitle': 'Статьи о выборе профессии, профессиональном росте и инсайтах из индустрии.',
+    'blog.read_more': 'Читать далее',
+    'blog.all': 'Все',
+    'blog.category.technology': 'Технологии',
+    'blog.category.health': 'Медицина',
+    'blog.category.creative': 'Креатив',
+    'blog.category.engineering': 'Инженерия',
+    'blog.category.business': 'Бизнес',
+    'blog.category.media': 'Медиа',
+    'blog.category.science': 'Наука',
+    'blog.category.education': 'Образование',
+    'blog.category.general': 'Общее',
+    'blog.not_found': 'Статья не найдена',
+    'blog.back': 'Назад к блогу',
+    'blog.published': 'Опубликовано',
+    'blog.by': 'автор',
+    'nav.blog': 'Блог',
   },
 };
 
@@ -384,6 +456,9 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
       if (saved === 'en' || saved === 'ru') {
         setUiLangState(saved);
         document.documentElement.setAttribute('lang', saved);
+      } else if (window.location.pathname.startsWith('/ru')) {
+        setUiLangState('ru');
+        document.documentElement.setAttribute('lang', 'ru');
       }
     } catch {
       // localStorage not available

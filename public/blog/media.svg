@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0015"/>
+      <stop offset="50%" style="stop-color:#4a003d"/>
+      <stop offset="100%" style="stop-color:#1a0020"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#d946ef;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#e879f9;stop-opacity:0.1"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#bg)"/>
+  <circle cx="600" cy="300" r="300" fill="url(#accent)"/>
+  <circle cx="200" cy="100" r="80" fill="#d946ef" fill-opacity="0.08"/>
+  <circle cx="1000" cy="500" r="120" fill="#e879f9" fill-opacity="0.06"/>
+  <!-- Play button triangle -->
+  <polygon points="550,250 550,340 660,295" fill="#d946ef" fill-opacity="0.3" stroke="#e879f9" stroke-opacity="0.4" stroke-width="2" stroke-linejoin="round"/>
+  <polygon points="555,255 555,335 650,295" fill="#d946ef" fill-opacity="0.15"/>
+  <!-- Sound waves -->
+  <g stroke="#e879f9" stroke-opacity="0.2" fill="none" stroke-width="1.5" stroke-linecap="round">
+    <path d="M490 260 Q470 295 490 330"/>
+    <path d="M470 240 Q440 295 470 350"/>
+  </g>
+  <g stroke="#d946ef" stroke-opacity="0.15" fill="none" stroke-width="1" stroke-linecap="round">
+    <path d="M710 260 Q730 295 710 330"/>
+    <path d="M730 240 Q760 295 730 350"/>
+  </g>
+  <!-- Social media dots -->
+  <circle cx="440" cy="370" r="4" fill="#e879f9" fill-opacity="0.2"/>
+  <circle cx="760" cy="370" r="4" fill="#e879f9" fill-opacity="0.2"/>
+  <circle cx="780" cy="250" r="3" fill="#d946ef" fill-opacity="0.15"/>
+  <circle cx="420" cy="250" r="3" fill="#d946ef" fill-opacity="0.15"/>
+  
+</svg>

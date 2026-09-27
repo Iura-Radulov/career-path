@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000f0c"/>
+      <stop offset="50%" style="stop-color:#003330"/>
+      <stop offset="100%" style="stop-color:#001a18"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#14b8a6;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#2dd4bf;stop-opacity:0.1"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#bg)"/>
+  <circle cx="600" cy="300" r="300" fill="url(#accent)"/>
+  <circle cx="200" cy="100" r="80" fill="#14b8a6" fill-opacity="0.08"/>
+  <circle cx="1000" cy="500" r="120" fill="#2dd4bf" fill-opacity="0.06"/>
+  <!-- Atom / molecule -->
+  <g transform="translate(600,290)">
+    <!-- Orbital paths -->
+    <ellipse cx="0" cy="0" rx="60" ry="20" fill="none" stroke="#14b8a6" stroke-opacity="0.25" stroke-width="1.5" transform="rotate(0)"/>
+    <ellipse cx="0" cy="0" rx="60" ry="20" fill="none" stroke="#2dd4bf" stroke-opacity="0.2" stroke-width="1.5" transform="rotate(60)"/>
+    <ellipse cx="0" cy="0" rx="60" ry="20" fill="none" stroke="#14b8a6" stroke-opacity="0.2" stroke-width="1.5" transform="rotate(120)"/>
+    <!-- Nucleus -->
+    <circle cx="0" cy="0" r="10" fill="#14b8a6" fill-opacity="0.25" stroke="#2dd4bf" stroke-opacity="0.3" stroke-width="1"/>
+    <circle cx="-3" cy="-2" r="4" fill="#14b8a6" fill-opacity="0.3"/>
+    <circle cx="3" cy="2" r="4" fill="#2dd4bf" fill-opacity="0.3"/>
+    <!-- Orbiting particles -->
+    <circle cx="60" cy="0" r="3" fill="#14b8a6" fill-opacity="0.5"/>
+    <circle cx="-30" cy="34" r="3" fill="#2dd4bf" fill-opacity="0.4"/>
+    <circle cx="30" cy="-34" r="2.5" fill="#14b8a6" fill-opacity="0.4"/>
+  </g>
+  <!-- Flask shape -->
+  <path d="M545 370 L545 340 L530 290 Q520 260 540 240 L660 240 Q680 260 670 290 L655 340 L655 370 Z" fill="none" stroke="#14b8a6" stroke-opacity="0.1" stroke-width="1.5"/>
+  <path d="M555 370 L555 340 L540 290 Q532 265 548 248 L652 248 Q668 265 660 290 L645 340 L645 370 Z" fill="#2dd4bf" fill-opacity="0.04" stroke="#14b8a6" stroke-opacity="0.15" stroke-width="1"/>
+  
+</svg>

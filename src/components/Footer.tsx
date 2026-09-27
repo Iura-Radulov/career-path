@@ -1,13 +1,18 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useTranslation } from '@/lib/i18n';
 import { MINI_APP_URL, MINI_APP_WEB_URL } from '@/lib/constants';
 import Logo from './Logo';
 
 export default function Footer() {
   const { t } = useTranslation();
+  const pathname = usePathname();
   const year = new Date().getFullYear();
+
+  const isRu = pathname.startsWith('/ru');
+  const p = isRu ? '/ru' : '';
 
   return (
     <footer className="bg-slate-950 border-t border-slate-800 py-12 px-4">
@@ -19,7 +24,9 @@ export default function Footer() {
               <Logo size="md" />
             </div>
             <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
-              AI-powered career guidance for students and young professionals. Find your ideal career path with interactive tests and AI roleplay.
+              {isRu
+                ? 'AI-профориентация для студентов и молодых специалистов. Найди свою идеальную карьеру с интерактивными тестами и AI-ролевыми играми.'
+                : 'AI-powered career guidance for students and young professionals. Find your ideal career path with interactive tests and AI roleplay.'}
             </p>
             <a
               href={MINI_APP_URL}
@@ -38,14 +45,13 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">{t('footer.product')}</h4>
             <ul className="space-y-2">
-              <li><Link href="/" className="text-slate-400 hover:text-white text-sm transition-colors">{t('footer.home')}</Link></li>
-              <li><Link href="/professions" className="text-slate-400 hover:text-white text-sm transition-colors">{t('nav.professions')}</Link></li>
+              <li><Link href={p || '/'} className="text-slate-400 hover:text-white text-sm transition-colors">{t('footer.home')}</Link></li>
+              <li><Link href={`${p}/professions`} className="text-slate-400 hover:text-white text-sm transition-colors">{t('nav.professions')}</Link></li>
               <li>
                 <a href={MINI_APP_WEB_URL} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white text-sm transition-colors">
                   {t('footer.web_app')}
                 </a>
               </li>
-              <li><Link href="/pricing" className="text-slate-400 hover:text-white text-sm transition-colors">{t('footer.pricing')}</Link></li>
             </ul>
           </div>
 
@@ -53,9 +59,9 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">{t('footer.company')}</h4>
             <ul className="space-y-2">
-              <li><Link href="/about" className="text-slate-400 hover:text-white text-sm transition-colors">{t('footer.about')}</Link></li>
-              <li><Link href="/privacy" className="text-slate-400 hover:text-white text-sm transition-colors">{t('footer.privacy')}</Link></li>
-              <li><Link href="/terms" className="text-slate-400 hover:text-white text-sm transition-colors">{t('footer.terms')}</Link></li>
+              <li><Link href={`${p}/about`} className="text-slate-400 hover:text-white text-sm transition-colors">{t('footer.about')}</Link></li>
+              <li><Link href={`${p}/privacy`} className="text-slate-400 hover:text-white text-sm transition-colors">{t('footer.privacy')}</Link></li>
+              <li><Link href={`${p}/terms`} className="text-slate-400 hover:text-white text-sm transition-colors">{t('footer.terms')}</Link></li>
             </ul>
           </div>
         </div>

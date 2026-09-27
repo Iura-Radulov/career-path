@@ -22,6 +22,7 @@ interface FormData {
   growth_outlook: string;
   sort_order: string;
   is_active: boolean;
+  home_page: boolean;
 }
 
 function EditProfessionContent({ user }: { user: User }) {
@@ -51,6 +52,7 @@ function EditProfessionContent({ user }: { user: User }) {
           growth_outlook: p.growth_outlook || '',
           sort_order: String(p.sort_order),
           is_active: p.is_active === 1,
+          home_page: p.home_page === 1,
         });
       });
   }, [id]);
@@ -72,6 +74,7 @@ function EditProfessionContent({ user }: { user: User }) {
           ...form,
           sort_order: Number(form.sort_order),
           is_active: form.is_active ? 1 : 0,
+          home_page: form.home_page ? 1 : 0,
         }),
       });
       if (!res.ok) {
@@ -227,6 +230,14 @@ function EditProfessionContent({ user }: { user: User }) {
                 checked={form.is_active} onChange={(e) => set('is_active', e.target.checked)}
               />
               <span className="text-slate-300 text-sm">Активна (показывать на сайте)</span>
+            </label>
+
+            <label className="flex items-center gap-3 cursor-pointer">
+              <input
+                type="checkbox" className="w-4 h-4 accent-cyan-500"
+                checked={form.home_page} onChange={(e) => set('home_page', e.target.checked)}
+              />
+              <span className="text-slate-300 text-sm">Показывать на главной</span>
             </label>
 
             <div className="flex items-center justify-between pt-2">

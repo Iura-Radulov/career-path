@@ -133,6 +133,31 @@ function initDb(db: Database.Database): void {
     VALUES (1315197985, 'iura_radulov', 'Yuri');
   `);
 
+  // Migration: platforms table (for affiliate partners)
+  try {
+    db.exec(`SELECT COUNT(*) FROM platforms LIMIT 1`);
+  } catch {
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS platforms (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        slug TEXT UNIQUE NOT NULL,
+        name_ru TEXT NOT NULL,
+        name_en TEXT NOT NULL,
+        description_ru TEXT,
+        description_en TEXT,
+        logo_url TEXT,
+        website_url TEXT,
+        affiliate_url TEXT,
+        commission_rate TEXT,
+        category TEXT DEFAULT 'coding',
+        is_active INTEGER DEFAULT 1,
+        sort_order INTEGER DEFAULT 0,
+        created_at TEXT DEFAULT (datetime('now')),
+        updated_at TEXT DEFAULT (datetime('now'))
+      );
+    `);
+  }
+
   const existingPlans = db.prepare('SELECT COUNT(*) as c FROM pricing_plans').get() as { c: number };
   if (existingPlans.c === 0) {
     db.prepare(`INSERT INTO pricing_plans (slug, name, price, features, is_popular, sort_order)
@@ -193,6 +218,43 @@ function initDb(db: Database.Database): void {
     }
   }
 
+  // Migration: add home_page to professions
+  try {
+    db.exec(`SELECT home_page FROM professions LIMIT 1`);
+  } catch {
+    try {
+      db.exec(`ALTER TABLE professions ADD COLUMN home_page INTEGER DEFAULT 0;`);
+    } catch {
+      // ignore
+    }
+  }
+
+
+  // Migration: articles table
+  try {
+    db.exec(`SELECT COUNT(*) FROM articles LIMIT 1`);
+  } catch {
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS articles (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        slug TEXT UNIQUE NOT NULL,
+        title_en TEXT NOT NULL,
+        title_ru TEXT NOT NULL,
+        content_en TEXT NOT NULL,
+        content_ru TEXT NOT NULL,
+        excerpt_en TEXT,
+        excerpt_ru TEXT,
+        image_url TEXT DEFAULT '',
+        category TEXT NOT NULL DEFAULT 'general',
+        author TEXT DEFAULT 'Career Path Simulator',
+        is_published INTEGER DEFAULT 0,
+        published_at TEXT,
+        created_at TEXT DEFAULT (datetime('now')),
+        updated_at TEXT DEFAULT (datetime('now'))
+      );
+    `);
+  }
+
   // Ensure admin user exists
   try {
     db.prepare("INSERT OR IGNORE INTO users (telegram_id, username, first_name, role) VALUES (1315197985, 'iura_radulov', 'Yuri', 'admin')").run();
@@ -225,8 +287,10 @@ export interface Profession {
   entry_salary_eu: string | null;
   entry_salary_cis: string | null;
   growth_outlook: string | null;
+  salary_data: string | null;
   sort_order: number;
   is_active: number;
+  home_page: number;
   created_at: string;
   updated_at: string;
 }
@@ -353,17 +417,22 @@ export function getUserStats(): UserStats {
 
 export function getAllProfessions(): Profession[] {
   const db = getDb();
-  return db.prepare("SELECT id, slug, name_en, name_ru, emoji, category, description_short, description_long as description_full, background_image, entry_salary_eu, entry_salary_cis, growth_outlook, sort_order, CASE WHEN is_active = 1 THEN 1 ELSE 0 END as is_active, created_at, created_at as updated_at FROM professions ORDER BY sort_order ASC, id ASC").all() as Profession[];
+  return db.prepare("SELECT id, slug, name_en, name_ru, emoji, category, description_short, description_long as description_full, background_image, entry_salary_eu, entry_salary_cis, growth_outlook, sort_order, CASE WHEN is_active = 1 THEN 1 ELSE 0 END as is_active, home_page, created_at, created_at as updated_at FROM professions ORDER BY sort_order ASC, id ASC").all() as Profession[];
+}
+
+export function getHomePageProfessions(): Profession[] {
+  const db = getDb();
+  return db.prepare("SELECT id, slug, name_en, name_ru, emoji, category, description_short, description_long as description_full, background_image, entry_salary_eu, entry_salary_cis, growth_outlook, sort_order, CASE WHEN is_active = 1 THEN 1 ELSE 0 END as is_active, home_page, created_at, created_at as updated_at FROM professions WHERE home_page = 1 AND is_active = 1 ORDER BY sort_order ASC, id ASC").all() as Profession[];
 }
 
 export function getProfessionById(id: number): Profession | null {
   const db = getDb();
-  return db.prepare("SELECT id, slug, name_en, name_ru, emoji, category, description_short, description_long as description_full, background_image, entry_salary_eu, entry_salary_cis, growth_outlook, sort_order, CASE WHEN is_active = 1 THEN 1 ELSE 0 END as is_active, created_at, created_at as updated_at FROM professions WHERE id = ?").get(id) as Profession | null;
+  return db.prepare("SELECT id, slug, name_en, name_ru, emoji, category, description_short, description_long as description_full, background_image, entry_salary_eu, entry_salary_cis, growth_outlook, sort_order, CASE WHEN is_active = 1 THEN 1 ELSE 0 END as is_active, home_page, created_at, created_at as updated_at FROM professions WHERE id = ?").get(id) as Profession | null;
 }
 
 export function getProfessionBySlug(slug: string): Profession | null {
   const db = getDb();
-  return db.prepare("SELECT id, slug, name_en, name_ru, emoji, category, description_short, description_long as description_full, background_image, entry_salary_eu, entry_salary_cis, growth_outlook, sort_order, CASE WHEN is_active = 1 THEN 1 ELSE 0 END as is_active, created_at, created_at as updated_at FROM professions WHERE slug = ?").get(slug) as Profession | null;
+  return db.prepare("SELECT id, slug, name_en, name_ru, emoji, category, description_short, description_long as description_full, background_image, entry_salary_eu, entry_salary_cis, growth_outlook, salary_data, sort_order, CASE WHEN is_active = 1 THEN 1 ELSE 0 END as is_active, home_page, created_at, created_at as updated_at FROM professions WHERE slug = ?").get(slug) as Profession | null;
 }
 
 export type ProfessionData = Omit<Profession, 'id' | 'created_at' | 'updated_at'>;
@@ -373,8 +442,8 @@ export function createProfession(data: ProfessionData): Profession {
   return db
     .prepare(
       `INSERT INTO professions (slug, name_en, name_ru, emoji, category, description_short, description_long,
-       entry_salary_eu, entry_salary_cis, growth_outlook, sort_order, is_active, background_image)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING *`
+       entry_salary_eu, entry_salary_cis, growth_outlook, sort_order, is_active, background_image, home_page)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING *`
     )
     .get(
       data.slug,
@@ -389,7 +458,8 @@ export function createProfession(data: ProfessionData): Profession {
       data.growth_outlook,
       data.sort_order,
       data.is_active,
-      data.background_image
+      data.background_image,
+      data.home_page ?? 0
     ) as Profession;
 }
 
@@ -415,6 +485,84 @@ export function updateProfession(id: number, data: Partial<ProfessionData>): Pro
 export function deleteProfession(id: number): void {
   const db = getDb();
   db.prepare('DELETE FROM professions WHERE id = ?').run(id);
+}
+
+
+export interface Article {
+  id: number;
+  slug: string;
+  title_en: string;
+  title_ru: string;
+  content_en: string;
+  content_ru: string;
+  excerpt_en: string | null;
+  excerpt_ru: string | null;
+  image_url: string;
+  category: string;
+  author: string;
+  is_published: number;
+  published_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export type ArticleData = Omit<Article, 'id' | 'created_at' | 'updated_at'>;
+
+const ARTICLE_SELECT = `SELECT id, slug, title_en, title_ru, content_en, content_ru, excerpt_en, excerpt_ru,
+       image_url, category, author, is_published, published_at, created_at, updated_at
+FROM articles`;
+
+export function getAllArticles(): Article[] {
+  const db = getDb();
+  return db.prepare(`${ARTICLE_SELECT} ORDER BY created_at DESC`).all() as Article[];
+}
+
+export function getPublishedArticles(): Article[] {
+  const db = getDb();
+  return db.prepare(`${ARTICLE_SELECT} WHERE is_published = 1 ORDER BY published_at DESC, created_at DESC`).all() as Article[];
+}
+
+export function getArticlesByCategory(category: string): Article[] {
+  const db = getDb();
+  return db.prepare(`${ARTICLE_SELECT} WHERE is_published = 1 AND category = ? ORDER BY published_at DESC, created_at DESC`).all(category) as Article[];
+}
+
+export function getArticleBySlug(slug: string): Article | null {
+  const db = getDb();
+  return db.prepare(`${ARTICLE_SELECT} WHERE slug = ?`).get(slug) as Article | null;
+}
+
+export function getArticleById(id: number): Article | null {
+  const db = getDb();
+  return db.prepare(`${ARTICLE_SELECT} WHERE id = ?`).get(id) as Article | null;
+}
+
+export function createArticle(data: ArticleData): Article {
+  const db = getDb();
+  return db.prepare(
+    `INSERT INTO articles (slug, title_en, title_ru, content_en, content_ru, excerpt_en, excerpt_ru,
+     image_url, category, author, is_published, published_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING *`
+  ).get(
+    data.slug, data.title_en, data.title_ru, data.content_en, data.content_ru,
+    data.excerpt_en ?? null, data.excerpt_ru ?? null, data.image_url ?? '',
+    data.category, data.author ?? 'Career Path Simulator',
+    data.is_published ?? 0, data.published_at ?? null
+  ) as Article;
+}
+
+export function updateArticle(id: number, data: Partial<ArticleData>): Article | null {
+  const db = getDb();
+  const fields = Object.keys(data).map((k) => `${k} = ?`).join(', ');
+  const values = Object.values(data);
+  return db.prepare(
+    `UPDATE articles SET ${fields}, updated_at = datetime('now') WHERE id = ? RETURNING *`
+  ).get(...values, id) as Article | null;
+}
+
+export function deleteArticle(id: number): void {
+  const db = getDb();
+  db.prepare('DELETE FROM articles WHERE id = ?').run(id);
 }
 
 export interface QuizStats {

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="50%" style="stop-color:#1e3a5f"/>
+      <stop offset="100%" style="stop-color:#0c2340"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#60a5fa;stop-opacity:0.1"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#bg)"/>
+  <circle cx="600" cy="300" r="300" fill="url(#accent)"/>
+  <circle cx="200" cy="100" r="80" fill="#3b82f6" fill-opacity="0.08"/>
+  <circle cx="1000" cy="500" r="120" fill="#60a5fa" fill-opacity="0.06"/>
+  <!-- Circuit board / hex grid -->
+  <g stroke="#3b82f6" stroke-opacity="0.2" fill="none" stroke-width="1.5">
+    <path d="M400 280 L500 280 L500 220 L520 220"/>
+    <path d="M520 220 L540 220 L540 280 L600 280"/>
+    <path d="M600 280 L660 280 L660 220 L700 220"/>
+    <path d="M500 280 L500 340 L520 340"/>
+    <path d="M600 280 L600 340 L660 340"/>
+    <path d="M540 220 L540 180 L580 180"/>
+    <path d="M660 220 L660 180 L620 180"/>
+    <circle cx="520" cy="220" r="4" fill="#3b82f6" fill-opacity="0.4" stroke="none"/>
+    <circle cx="660" cy="220" r="4" fill="#3b82f6" fill-opacity="0.4" stroke="none"/>
+    <circle cx="500" cy="340" r="3" fill="#3b82f6" fill-opacity="0.3" stroke="none"/>
+    <circle cx="660" cy="340" r="3" fill="#3b82f6" fill-opacity="0.3" stroke="none"/>
+  </g>
+  <!-- Central hexagon -->
+  <polygon points="600,240 650,270 650,330 600,360 550,330 550,270" stroke="#3b82f6" stroke-opacity="0.35" fill="#3b82f6" fill-opacity="0.06" stroke-width="1.5"/>
+  <polygon points="600,260 635,280 635,320 600,340 565,320 565,280" stroke="#3b82f6" stroke-opacity="0.2" fill="none" stroke-width="1"/>
+  <!-- Data nodes connections -->
+  <circle cx="600" cy="300" r="8" fill="#60a5fa" fill-opacity="0.5"/>
+  <circle cx="600" cy="300" r="3" fill="#60a5fa" fill-opacity="0.8"/>
+  
+</svg>

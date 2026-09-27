@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import LandingNav from './LandingNav';
 import HeroIllustration from './HeroIllustration';
 import { useTranslation } from '@/lib/i18n';
@@ -7,6 +9,9 @@ import { MINI_APP_URL } from '@/lib/constants';
 
 export default function LandingHero() {
   const { t } = useTranslation();
+  const pathname = usePathname();
+  const isRu = pathname.startsWith('/ru');
+  const prefix = isRu ? '/ru' : '';
 
   return (
     <section
@@ -59,12 +64,12 @@ export default function LandingHero() {
                 {t('hero.cta_start')}
                 <span>→</span>
               </a>
-              <a
-                href="/professions"
+              <Link
+                href={`${prefix}/professions`}
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl border-2 border-white/20 hover:border-white/50 active:scale-95 text-white font-semibold text-lg transition-all duration-150 w-full sm:w-auto"
               >
                 {t('hero.cta_professions')}
-              </a>
+              </Link>
             </div>
 
             <p className="mt-6 text-slate-500 text-sm">{t('hero.footnote')}</p>

@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import LandingNav from '@/components/LandingNav';
 import Footer from '@/components/Footer';
+import AffiliatePlatforms from '@/components/AffiliatePlatforms';
+import SalaryLocalized from '@/components/SalaryLocalized';
 import { useTranslation } from '@/lib/i18n';
 import { MINI_APP_WEB_URL } from '@/lib/constants';
 
@@ -61,25 +63,102 @@ const fallbackProfessions: Record<string, Omit<ProfessionData, 'id' | 'descripti
     growth_outlook: 'High (18% by 2030)', background_image: null,
   },
   'analyst': {
-    slug: 'analyst', name_en: 'Data Analyst / Scientist', name_ru: 'Аналитик данных',
+    slug: 'data-scientist', name_en: 'Data Analyst / Scientist', name_ru: 'Аналитик данных',
+    emoji: '👨‍💼', category: 'technology',
+    description_short: 'Анализируй данные и находи инсайты для бизнеса.',
+    entry_salary_eu: '€45,000 – €100,000', entry_salary_cis: '$15,000 – $55,000',
+    growth_outlook: 'Very High (28% by 2030)', background_image: null,
+  },
+  'data-scientist': {
+    slug: 'data-scientist', name_en: 'Data Scientist', name_ru: 'Аналитик данных',
     emoji: '👨‍💼', category: 'technology',
     description_short: 'Анализируй данные и находи инсайты для бизнеса.',
     entry_salary_eu: '€45,000 – €100,000', entry_salary_cis: '$15,000 – $55,000',
     growth_outlook: 'Very High (28% by 2030)', background_image: null,
   },
   'energy': {
-    slug: 'energy', name_en: 'Renewable Energy Tech', name_ru: 'Специалист по возобновляемой энергии',
+    slug: 'renewable-energy', name_en: 'Renewable Energy Tech', name_ru: 'Специалист по возобновляемой энергии',
+    emoji: '⚡', category: 'engineering',
+    description_short: 'Работай над решениями для устойчивого энергетического будущего.',
+    entry_salary_eu: '€40,000 – €80,000', entry_salary_cis: '$10,000 – $35,000',
+    growth_outlook: 'Very High (35% by 2030)', background_image: null,
+  },
+  'renewable-energy': {
+    slug: 'renewable-energy', name_en: 'Renewable Energy Specialist', name_ru: 'Специалист по возобновляемой энергии',
     emoji: '⚡', category: 'engineering',
     description_short: 'Работай над решениями для устойчивого энергетического будущего.',
     entry_salary_eu: '€40,000 – €80,000', entry_salary_cis: '$10,000 – $35,000',
     growth_outlook: 'Very High (35% by 2030)', background_image: null,
   },
   'creator': {
-    slug: 'creator', name_en: 'Content Creator', name_ru: 'Криэйтор / Контент-мейкер',
+    slug: 'content-creator', name_en: 'Content Creator', name_ru: 'Криэйтор / Контент-мейкер',
     emoji: '🎬', category: 'business',
     description_short: 'Создавай контент для соцсетей, YouTube, TikTok и других платформ.',
     entry_salary_eu: '€25,000 – €120,000', entry_salary_cis: '$5,000 – $60,000',
     growth_outlook: 'High (20% by 2030)', background_image: null,
+  },
+  'content-creator': {
+    slug: 'content-creator', name_en: 'Content Creator', name_ru: 'Криэйтор / Контент-мейкер',
+    emoji: '🎬', category: 'business',
+    description_short: 'Создавай контент для соцсетей, YouTube, TikTok и других платформ.',
+    entry_salary_eu: '€25,000 – €120,000', entry_salary_cis: '$5,000 – $60,000',
+    growth_outlook: 'High (20% by 2030)', background_image: null,
+  },
+  'ai-ml-engineer': {
+    slug: 'ai-ml-engineer', name_en: 'AI/ML Engineer', name_ru: 'AI/ML Инженер',
+    emoji: '🤖', category: 'technology',
+    description_short: 'Создавай нейросети, обучай модели и строй системы искусственного интеллекта.',
+    entry_salary_eu: '€35k-50k/год', entry_salary_cis: '$1000-1500/мес',
+    growth_outlook: 'Рост 35%+ в EU к 2028', background_image: null,
+  },
+  'project-manager': {
+    slug: 'project-manager', name_en: 'Project Manager', name_ru: 'Project Manager',
+    emoji: '📋', category: 'business',
+    description_short: 'Управляй проектами, командами и сроками — делай сложное простым.',
+    entry_salary_eu: '€25k-35k/год', entry_salary_cis: '$700-1200/мес',
+    growth_outlook: 'Рост 15% в EU к 2027', background_image: null,
+  },
+  'psychologist': {
+    slug: 'psychologist', name_en: 'Psychologist', name_ru: 'Психолог',
+    emoji: '🧠', category: 'health',
+    description_short: 'Помогай людям разбираться в себе, находить опору и менять жизнь к лучшему.',
+    entry_salary_eu: '€20k-30k/год', entry_salary_cis: '$300-600/мес (на старте)',
+    growth_outlook: 'Рост 20% в СНГ к 2027', background_image: null,
+  },
+  'cybersecurity': {
+    slug: 'cybersecurity', name_en: 'Cybersecurity Specialist', name_ru: 'Специалист по кибербезопасности',
+    emoji: '🛡️', category: 'technology',
+    description_short: 'Защищай данные, системы и сети от хакеров и кибератак.',
+    entry_salary_eu: '€30k-40k/год', entry_salary_cis: '$800-1500/мес',
+    growth_outlook: 'Рост 30%+ в EU к 2028', background_image: null,
+  },
+  'devops': {
+    slug: 'devops', name_en: 'DevOps Engineer', name_ru: 'DevOps Инженер',
+    emoji: '⚡', category: 'technology',
+    description_short: 'Строй инфраструктуру, автоматизируй процессы и делай релизы быстрыми.',
+    entry_salary_eu: '€30k-45k/год', entry_salary_cis: '$1000-1800/мес',
+    growth_outlook: 'Рост 25% в EU к 2027', background_image: null,
+  },
+  'product-manager': {
+    slug: 'product-manager', name_en: 'Product Manager', name_ru: 'Product Manager',
+    emoji: '📱', category: 'business',
+    description_short: 'Создавай продукты от идеи до релиза — исследуй, приоритизируй, запускай.',
+    entry_salary_eu: '€30k-45k/год', entry_salary_cis: '$1000-2000/мес',
+    growth_outlook: 'Рост 20% в EU к 2027', background_image: null,
+  },
+  'data-analyst': {
+    slug: 'data-analyst', name_en: 'Data Analyst', name_ru: 'Data Analyst',
+    emoji: '📊', category: 'technology',
+    description_short: 'Превращай сырые данные в понятные решения для бизнеса.',
+    entry_salary_eu: '€25k-35k/год', entry_salary_cis: '$600-1200/мес',
+    growth_outlook: 'Рост 20% в EU к 2027', background_image: null,
+  },
+  'smm-specialist': {
+    slug: 'smm-specialist', name_en: 'SMM Specialist', name_ru: 'SMM-специалист',
+    emoji: '📱', category: 'creative',
+    description_short: 'Создавай контент, управляй сообществами и продвигай бренды в соцсетях.',
+    entry_salary_eu: '€18k-28k/год', entry_salary_cis: '$400-800/мес',
+    growth_outlook: 'Рост 15% в СНГ к 2027', background_image: null,
   },
 };
 
@@ -91,23 +170,38 @@ const categoryColors: Record<string, string> = {
   business: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
 };
 
+// Map DB slugs to i18n key prefixes
+const SLUG_TO_I18N: Record<string, string> = {
+  'software-dev': 'dev',
+  'doctor': 'doctor',
+  'designer': 'designer',
+  'engineer': 'engineer',
+  'marketer': 'marketer',
+  'data-scientist': 'analyst',
+  'renewable-energy': 'energy',
+  'content-creator': 'creator',
+};
+
 interface Props {
   slug: string;
 }
 
 export default function ProfessionPageContent({ slug }: Props) {
-  const { t } = useTranslation();
+  const { t, uiLang } = useTranslation();
   const [profession, setProfession] = useState<ProfessionData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(`/api/admin/professions/by-slug/${slug}`)
-      .then(r => r.json())
+      .then(r => {
+        if (!r.ok) throw new Error('Not found');
+        return r.json();
+      })
       .then((data: ProfessionData | null) => {
         setProfession(data);
       })
       .catch(() => {
-        // Fallback to static data
+        // Fallback to static data on any error (network or 404)
         const fallback = fallbackProfessions[slug];
         if (fallback) {
           setProfession({ id: 0, ...fallback, description_long: null, why_popular: null, what_to_study: null });
@@ -140,7 +234,7 @@ export default function ProfessionPageContent({ slug }: Props) {
     );
   }
 
-  const { name_en, emoji, category: categoryKey, entry_salary_eu, entry_salary_cis, growth_outlook, background_image } = profession;
+  const { name_en, emoji, category: categoryKey, entry_salary_eu, entry_salary_cis, growth_outlook, background_image, salary_data } = profession;
 
   return (
     <div className="min-h-screen bg-slate-950">
@@ -154,7 +248,7 @@ export default function ProfessionPageContent({ slug }: Props) {
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: `url(${background_image}?v=2)` }}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-[rgba(2,6,23,0.65)] via-[rgba(2,6,23,0.2)] to-[rgba(2,6,23,0.6)]" />
+
           </>
         )}
         {!background_image && (
@@ -186,7 +280,7 @@ export default function ProfessionPageContent({ slug }: Props) {
                   {t(`professions.${categoryKey}`)}
                 </div>
                 <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                  {profession.name_ru || name_en}
+                  {uiLang === 'en' ? name_en : (profession.name_ru || name_en)}
                 </h1>
               </div>
             </div>
@@ -199,22 +293,26 @@ export default function ProfessionPageContent({ slug }: Props) {
         {/* Description */}
         <section className="p-6 rounded-2xl bg-slate-800/50 border border-slate-700/50">
           <h2 className="text-xl font-bold text-white mb-3">{t('profession.description')}</h2>
-          <p className="text-slate-300 leading-relaxed">{profession.description_short || profession.description_long || t(`professions.${slug}.desc`)}</p>
+          <p className="text-slate-300 leading-relaxed">
+            {uiLang === 'en'
+              ? (
+                  SLUG_TO_I18N[slug]
+                    ? (t(`professions.${SLUG_TO_I18N[slug]}.desc`) || profession.description_short || profession.description_long || '')
+                    : (t(`professions.${slug}.desc`) || profession.description_short || profession.description_long || '')
+                )
+              : (profession.description_short || profession.description_long || t(`professions.${slug}.desc`))}
+          </p>
         </section>
 
-        {/* Salary insights */}
+        {/* Salary insights — локализовано */}
         <section className="p-6 rounded-2xl bg-slate-800/50 border border-slate-700/50">
           <h2 className="text-xl font-bold text-white mb-4">{t('profession.salary.title')}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-700/40">
-              <p className="text-slate-400 text-sm mb-1">{t('profession.salary.eu')}</p>
-              <p className="text-white font-semibold text-lg">{entry_salary_eu}</p>
-            </div>
-            <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-700/40">
-              <p className="text-slate-400 text-sm mb-1">{t('profession.salary.cis')}</p>
-              <p className="text-white font-semibold text-lg">{entry_salary_cis}</p>
-            </div>
-          </div>
+          <SalaryLocalized
+            entrySalaryEu={entry_salary_eu}
+            entrySalaryCis={entry_salary_cis}
+            salaryDataRaw={salary_data}
+            locale={uiLang}
+          />
         </section>
 
         {/* Growth outlook */}
@@ -223,7 +321,13 @@ export default function ProfessionPageContent({ slug }: Props) {
             <h2 className="text-xl font-bold text-white mb-3">{t('profession.growth')}</h2>
             <div className="flex items-center gap-3">
               <span className="text-2xl">📈</span>
-              <p className="text-emerald-400 font-semibold text-lg">{growth_outlook}</p>
+              <p className="text-emerald-400 font-semibold text-lg">
+                {uiLang === 'en'
+                  ? (SLUG_TO_I18N[slug]
+                      ? (t(`professions.${SLUG_TO_I18N[slug]}.growth`) || growth_outlook)
+                      : (t(`professions.${slug}.growth`) || growth_outlook))
+                  : growth_outlook}
+              </p>
             </div>
           </section>
         )}
@@ -257,6 +361,9 @@ export default function ProfessionPageContent({ slug }: Props) {
             <span>→</span>
           </a>
         </section>
+
+        {/* Affiliate platforms */}
+        {profession && <AffiliatePlatforms locale={uiLang} limit={6} professionCategory={profession.category} />}
 
       </div>
 

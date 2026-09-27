@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000f0f"/>
+      <stop offset="50%" style="stop-color:#003340"/>
+      <stop offset="100%" style="stop-color:#001a1a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#22d3ee;stop-opacity:0.1"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#bg)"/>
+  <circle cx="600" cy="300" r="300" fill="url(#accent)"/>
+  <circle cx="200" cy="100" r="80" fill="#06b6d4" fill-opacity="0.08"/>
+  <circle cx="1000" cy="500" r="120" fill="#22d3ee" fill-opacity="0.06"/>
+  <!-- Bar chart going up -->
+  <g stroke-linejoin="round">
+    <rect x="440" y="320" width="30" height="60" rx="2" fill="#06b6d4" fill-opacity="0.15" stroke="#06b6d4" stroke-opacity="0.3" stroke-width="1"/>
+    <rect x="485" y="280" width="30" height="100" rx="2" fill="#22d3ee" fill-opacity="0.15" stroke="#22d3ee" stroke-opacity="0.3" stroke-width="1"/>
+    <rect x="530" y="240" width="30" height="140" rx="2" fill="#06b6d4" fill-opacity="0.18" stroke="#06b6d4" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="575" y="200" width="30" height="180" rx="2" fill="#22d3ee" fill-opacity="0.2" stroke="#22d3ee" stroke-opacity="0.4" stroke-width="1"/>
+    <rect x="620" y="170" width="30" height="210" rx="2" fill="#06b6d4" fill-opacity="0.22" stroke="#06b6d4" stroke-opacity="0.4" stroke-width="1"/>
+    <rect x="665" y="210" width="30" height="170" rx="2" fill="#22d3ee" fill-opacity="0.18" stroke="#22d3ee" stroke-opacity="0.3" stroke-width="1"/>
+    <rect x="710" y="250" width="30" height="130" rx="2" fill="#06b6d4" fill-opacity="0.15" stroke="#06b6d4" stroke-opacity="0.25" stroke-width="1"/>
+    <!-- Trend line -->
+    <polyline points="455,370 500,330 545,300 590,260 635,230 680,270 725,300" stroke="#22d3ee" stroke-opacity="0.5" fill="none" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <!-- Axis line -->
+  <line x1="430" y1="390" x2="750" y2="390" stroke="#06b6d4" stroke-opacity="0.15" stroke-width="1"/>
+  
+</svg>

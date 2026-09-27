@@ -38,6 +38,12 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: siteUrl,
+    languages: {
+      en: siteUrl,
+      ru: `${siteUrl}/ru`,
+    },
+  },
+  other: {
   },
 };
 
@@ -62,6 +68,25 @@ export default function RootLayout({
             </Script>
           </>
         )}
+        {/* Yandex.Metrika counter */}
+        <Script id="yandex-metrika" strategy="afterInteractive">
+          {`
+            (function(m,e,t,r,i,k,a){
+              m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+              m[i].l=1*new Date();
+              for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+              k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+            })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110281596', 'ym');
+
+            ym(110281596, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+          `}
+        </Script>
+        <noscript>
+          <div><img src="https://mc.yandex.ru/watch/110281596" style={{position:'absolute', left:'-9999px'}} alt="" /></div>
+        </noscript>
+        {/* /Yandex.Metrika counter */}
+        {/* Server-side meta for verification bots */}
+        <meta name="impact-site-verification" value="686bace0-0db3-44d6-9981-1e35b907199b" />
         <Providers>{children}</Providers>
       </body>
     </html>

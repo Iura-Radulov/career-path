@@ -75,6 +75,7 @@ function ProfessionsContent({ user }: { user: User }) {
                       <th className="text-left px-4 py-3">Зарплата CIS</th>
                       <th className="text-left px-4 py-3">Порядок</th>
                       <th className="text-left px-4 py-3">Статус</th>
+                      <th className="text-left px-4 py-3">Главная</th>
                       <th className="text-left px-4 py-3">Действия</th>
                     </tr>
                   </thead>
@@ -96,6 +97,11 @@ function ProfessionsContent({ user }: { user: User }) {
                         <td className="px-4 py-3">
                           <span className={`px-2 py-0.5 rounded text-xs ${p.is_active ? 'bg-emerald-900/50 text-emerald-400' : 'bg-slate-700 text-slate-500'}`}>
                             {p.is_active ? 'Активна' : 'Скрыта'}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3">
+                          <span className={`px-2 py-0.5 rounded text-xs ${p.home_page ? 'bg-cyan-900/50 text-cyan-400' : 'bg-slate-700/50 text-slate-600'}`}>
+                            {p.home_page ? 'Да' : '—'}
                           </span>
                         </td>
                         <td className="px-4 py-3">
