@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
 
-    await createSession(user.id, user.telegram_id!);
+    await createSession(user.id, user.telegram_id!, 'admin');
 
     return NextResponse.json({ success: true, user: { id: user.id, username: user.username, role: user.role } });
   } catch (error) {
